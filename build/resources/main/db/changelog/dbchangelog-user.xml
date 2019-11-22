@@ -1,0 +1,52 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+
+	<changeSet author="williamlema" id="dropTable-user">
+		<preConditions onFail="MARK_RAN">
+			<tableExists tableName="user" />
+		</preConditions>
+		<dropTable cascadeConstraints="true"
+			tableName="user" />
+	</changeSet>
+
+	<changeSet author="williamlema" id="create_user_table">
+		<createTable tableName="user">
+			<column autoIncrement="true"  name="id" type="BIGINT">
+				<constraints primaryKey="true" primaryKeyName="pk_user" />
+			</column>
+			<column name="name" type="varchar(255)" />
+			<column name="password" type="varchar(255)" />
+			<column name="user_name" type="varchar(255)" />
+			<column name="email" type="varchar(255)" />
+			<column name="phone_number" type="varchar(255)" />
+			<column name="rol_id" type="BIGINT" />
+			<column name="activated" type="BOOLEAN" />
+
+		</createTable>
+	</changeSet>
+
+	<changeSet author="williamlema" id="create_foreign_key_constraint_user_rol_table">
+		<addForeignKeyConstraint baseColumnNames="rol_id"
+								 baseTableName="user"
+								 constraintName="fk_user_rol"
+								 onDelete="CASCADE"
+								 onUpdate="RESTRICT"
+								 referencedColumnNames="id"
+								 referencedTableName="rol"/>
+	</changeSet>
+
+	<changeSet author="williamlema" id="insert_user_admin">
+		<insert tableName="user">
+			<column name="name">William Leon</column>
+			<column name="password">123456</column>
+			<column name="user_name">williamlema</column>
+			<column name="email">weleonm@gmail.com</column>
+			<column name="phone_number">3107760309</column>
+			<column name="rol_id">1</column>
+			<column name="activated" valueBoolean="true"/>
+		</insert>
+	</changeSet>
+
+</databaseChangeLog>
