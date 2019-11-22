@@ -8,4 +8,6 @@ public class Resource {
     public static final String USER = "user";
     public static final String ALL_USER = "/all";
 
+    public static final String ROL = "rol";
+
 }
