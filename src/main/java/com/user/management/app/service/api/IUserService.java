@@ -32,4 +32,12 @@ public interface IUserService {
      * Update user information
      */
     User update(String authorization, User userInformation);
+
+    /**
+     * Save new user
+     *
+     * @param newUser
+     * @return
+     */
+    User save (User newUser);
 }
