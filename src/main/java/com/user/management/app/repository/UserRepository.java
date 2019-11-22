@@ -3,8 +3,6 @@ package com.user.management.app.repository;
 import com.user.management.app.model.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import java.util.Optional;
-
 /**
  * Repository to handle {@link User} entity in database
  *
