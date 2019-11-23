@@ -1,5 +1,6 @@
 package com.user.management.app.service.impl;
 
+import com.user.management.app.exception.UserDataAlreadyExistException;
 import com.user.management.app.model.entity.User;
 import com.user.management.app.repository.UserRepository;
 import com.user.management.app.service.api.IUserService;
@@ -67,9 +68,21 @@ public class UserServiceImpl implements IUserService {
      */
     @Override
     public User save(User newUser) {
-        if(ObjectUtils.isEmpty(userRepository.findFirstByUserName(newUser.getUserName()))){
-
+        if(!ObjectUtils.isEmpty(userRepository.findFirstByUserName(newUser.getUserName()))){
+            throw new UserDataAlreadyExistException("User already exist in system");
         }
         return userRepository.save(newUser);
+    }
+
+    /**
+     * Active user
+     *
+     * @param userToActive
+     * @return
+     */
+    @Override
+    public User active(User userToActive) {
+        userToActive.setActivated(Boolean.TRUE);
+        return userRepository.save(userToActive);
     }
 }

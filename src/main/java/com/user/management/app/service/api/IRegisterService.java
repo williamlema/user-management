@@ -1,8 +1,6 @@
 package com.user.management.app.service.api;
 
-import com.user.management.app.model.entity.User;
-
-import java.security.NoSuchAlgorithmException;
+import com.user.management.app.model.dto.RegisterUser;
 
 /**
  * register operations
@@ -17,7 +15,7 @@ public interface IRegisterService {
      *
      * @param newUser
      */
-    void registerNewUser(User newUser) throws NoSuchAlgorithmException;
+    void registerNewUser(RegisterUser newUser);
 
     /**
      * Validate verification

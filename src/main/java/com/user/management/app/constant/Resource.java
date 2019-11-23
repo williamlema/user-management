@@ -10,4 +10,7 @@ public class Resource {
 
     public static final String ROL = "rol";
 
+    public static final String REGISTER = "register";
+    public static final String VALIDATE = "/validate/{token}";
+
 }

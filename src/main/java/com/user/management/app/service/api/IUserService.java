@@ -40,4 +40,12 @@ public interface IUserService {
      * @return
      */
     User save (User newUser);
+
+    /**
+     * Active user
+     *
+     * @param userToActive
+     * @return
+     */
+    User active(User userToActive);
 }

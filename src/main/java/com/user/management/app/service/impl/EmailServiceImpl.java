@@ -2,6 +2,7 @@ package com.user.management.app.service.impl;
 
 import com.user.management.app.service.api.IEmailService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
@@ -17,6 +18,9 @@ import org.springframework.stereotype.Service;
 public class EmailServiceImpl implements IEmailService {
 
     private final JavaMailSender mailSender;
+
+    @Value( "${spring.mail.username}" )
+    private String email;
 
     @Autowired
     public EmailServiceImpl(JavaMailSender mailSender) {
@@ -36,7 +40,7 @@ public class EmailServiceImpl implements IEmailService {
         mailMessage.setTo(toEmail);
         mailMessage.setSubject(subject);
         mailMessage.setText(message);
-        mailMessage.setFrom("no.replay.test.l@gmail.com");
+        mailMessage.setFrom(email);
         mailSender.send(mailMessage);
     }
 }

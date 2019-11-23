@@ -25,4 +25,10 @@ public interface IRolService {
      * Update rol information
      */
     Rol update(String authorization, Rol rolInformation);
+
+    /**
+     *
+     * Get rol information
+     */
+    Rol get(Long id);
 }

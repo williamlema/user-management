@@ -1,15 +1,22 @@
 package com.user.management.app.service.impl;
 
+import com.user.management.app.exception.InActiveTokenException;
+import com.user.management.app.model.dto.RegisterUser;
+import com.user.management.app.model.entity.Token;
 import com.user.management.app.model.entity.User;
-import com.user.management.app.repository.RolRepository;
+import com.user.management.app.repository.TokenRepository;
 import com.user.management.app.service.api.IEmailService;
 import com.user.management.app.service.api.IRegisterService;
+import com.user.management.app.service.api.IRolService;
 import com.user.management.app.service.api.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.util.ObjectUtils;
 
-import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
+import java.util.Base64;
 
 /**
  * Implementation class for register operations
@@ -25,17 +32,23 @@ public class RegisterServiceImpl implements IRegisterService {
 
     private final IUserService userService;
 
-    private final RolRepository rolRepository;
+    private final IRolService rolService;
 
-    private final Long DEFAULT_USER_ROL_ID = Long.valueOf(1);
+    private final TokenRepository tokenRepository;
 
-    private SecureRandom random;
+    private final Long DEFAULT_USER_ROL_ID = Long.valueOf(3);
+
+    private final String SUBJECT = "Verificacion de cuenta";
+
+    @Value( "${validate.address.url}" )
+    private String VALIDATE_URL;
 
     @Autowired
-    public RegisterServiceImpl(IEmailService emailService, IUserService userService, RolRepository rolRepository) {
+    public RegisterServiceImpl(IEmailService emailService, IUserService userService, IRolService rolService, TokenRepository tokenRepository) {
         this.emailService = emailService;
         this.userService = userService;
-        this.rolRepository = rolRepository;
+        this.rolService = rolService;
+        this.tokenRepository = tokenRepository;
     }
 
     /**
@@ -44,11 +57,28 @@ public class RegisterServiceImpl implements IRegisterService {
      * @param newUser
      */
     @Override
-    public void registerNewUser(User newUser) throws NoSuchAlgorithmException {
-        this.random = SecureRandom.getInstanceStrong();
-        newUser.setRol(rolRepository.getOne(DEFAULT_USER_ROL_ID));
-        User savedUser = userService.save(newUser);
+    public void registerNewUser(RegisterUser newUser) {
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+        User user = User.builder()
+                .name(newUser.getName())
+                .userName(newUser.getUserName())
+                .password(encoder.encode(newUser.getPassword()))
+                .email(newUser.getEmail())
+                .phoneNumber(newUser.getPhoneNumber())
+                .rol(rolService.get(DEFAULT_USER_ROL_ID))
+                .activated(Boolean.FALSE)
+                .build();
 
+        User savedUser = userService.save(user);
+        Token temporalToken = Token.builder()
+                .token(generateSafeToken())
+                .active(Boolean.TRUE)
+                .user(savedUser)
+                .build();
+        Token generatedToken = tokenRepository.save(temporalToken);
+        String message ="Abrir el siguiente link en el nevagador \n "
+                .concat(VALIDATE_URL).concat(generatedToken.getToken());
+        emailService.sendMail(newUser.getEmail(), SUBJECT, message);
     }
 
     /**
@@ -58,7 +88,20 @@ public class RegisterServiceImpl implements IRegisterService {
      */
     @Override
     public void validateUser(String token) {
+        Token savedToken = tokenRepository.findFirstByTokenAndActive(token, Boolean.TRUE);
+        if(ObjectUtils.isEmpty(savedToken)){
+            throw new InActiveTokenException("Token inactivo");
+        }
+        userService.active(savedToken.getUser());
+        savedToken.setActive(Boolean.FALSE);
+        tokenRepository.save(savedToken);
+    }
 
-
+    private String generateSafeToken() {
+        SecureRandom random = new SecureRandom();
+        byte bytes[] = new byte[20];
+        random.nextBytes(bytes);
+        String token = Base64.getEncoder().encodeToString(bytes);
+        return token;
     }
 }
