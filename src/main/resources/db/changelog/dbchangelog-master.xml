@@ -5,5 +5,6 @@
 
   <include file="db/changelog/dbchangelog-rol.xml"/>
   <include file="db/changelog/dbchangelog-user.xml"/>
+  <include file="db/changelog/dbchangelog-token.xml"/>
 
 </databaseChangeLog>

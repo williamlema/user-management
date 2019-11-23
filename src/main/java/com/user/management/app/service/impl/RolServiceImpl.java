@@ -46,4 +46,14 @@ public class RolServiceImpl implements IRolService {
     public Rol update(String authorization, Rol rolInformation) {
         return rolRepository.save(rolInformation);
     }
+
+    /**
+     * Get rol information
+     *
+     * @param id
+     */
+    @Override
+    public Rol get(Long id) {
+        return rolRepository.getOne(id);
+    }
 }
