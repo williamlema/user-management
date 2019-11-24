@@ -39,6 +39,10 @@ public class Token implements Serializable {
     private boolean active;
 
     @JsonIgnore
+    @Column(name="type")
+    private String type;
+
+    @JsonIgnore
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(foreignKey = @ForeignKey(name = "fk_token_user"), name = "user_id")

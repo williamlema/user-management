@@ -1,6 +1,6 @@
 package com.user.management.app.controller;
 
-import com.user.management.app.model.dto.RegisterUser;
+import com.user.management.app.model.dto.RegisterUserDto;
 import com.user.management.app.service.api.IRegisterService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -21,7 +21,7 @@ public class RegisterController {
     }
 
     @PostMapping
-    public ResponseEntity registerUser(@RequestBody RegisterUser newUser){
+    public ResponseEntity registerUser(@RequestBody RegisterUserDto newUser){
         registerService.registerNewUser(newUser);
         return ResponseEntity.ok("");
     }

@@ -1,7 +1,8 @@
 package com.user.management.app.service.impl;
 
+import com.user.management.app.constant.TokenType;
 import com.user.management.app.exception.InActiveTokenException;
-import com.user.management.app.model.dto.RegisterUser;
+import com.user.management.app.model.dto.RegisterUserDto;
 import com.user.management.app.model.entity.Token;
 import com.user.management.app.model.entity.User;
 import com.user.management.app.repository.TokenRepository;
@@ -15,8 +16,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
 
-import java.security.SecureRandom;
-import java.util.Base64;
+import static com.user.management.app.util.TokenUtil.generateSafeToken;
 
 /**
  * Implementation class for register operations
@@ -57,7 +57,7 @@ public class RegisterServiceImpl implements IRegisterService {
      * @param newUser
      */
     @Override
-    public void registerNewUser(RegisterUser newUser) {
+    public void registerNewUser(RegisterUserDto newUser) {
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         User user = User.builder()
                 .name(newUser.getName())
@@ -73,6 +73,7 @@ public class RegisterServiceImpl implements IRegisterService {
         Token temporalToken = Token.builder()
                 .token(generateSafeToken())
                 .active(Boolean.TRUE)
+                .type(TokenType.REGISTER.name())
                 .user(savedUser)
                 .build();
         Token generatedToken = tokenRepository.save(temporalToken);
@@ -95,13 +96,5 @@ public class RegisterServiceImpl implements IRegisterService {
         userService.active(savedToken.getUser());
         savedToken.setActive(Boolean.FALSE);
         tokenRepository.save(savedToken);
-    }
-
-    private String generateSafeToken() {
-        SecureRandom random = new SecureRandom();
-        byte bytes[] = new byte[20];
-        random.nextBytes(bytes);
-        String token = Base64.getEncoder().encodeToString(bytes);
-        return token;
     }
 }

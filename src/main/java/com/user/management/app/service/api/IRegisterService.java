@@ -1,6 +1,6 @@
 package com.user.management.app.service.api;
 
-import com.user.management.app.model.dto.RegisterUser;
+import com.user.management.app.model.dto.RegisterUserDto;
 
 /**
  * register operations
@@ -15,7 +15,7 @@ public interface IRegisterService {
      *
      * @param newUser
      */
-    void registerNewUser(RegisterUser newUser);
+    void registerNewUser(RegisterUserDto newUser);
 
     /**
      * Validate verification
