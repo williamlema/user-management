@@ -1,7 +1,6 @@
 package com.user.management.app.model.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -51,7 +50,7 @@ public class User implements Serializable {
     @Column(name="activated")
     private boolean activated;
 
-    @JsonIgnore
+    @JsonProperty("permissions")
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(foreignKey = @ForeignKey(name = "fk_user_rol"), name = "rol_id")

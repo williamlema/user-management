@@ -11,7 +11,7 @@ import java.io.Serializable;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class RegisterUser implements Serializable {
+public class RegisterUserDto implements Serializable {
 
     private String name;
 

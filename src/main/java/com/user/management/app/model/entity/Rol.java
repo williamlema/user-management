@@ -1,5 +1,6 @@
 package com.user.management.app.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -26,10 +27,12 @@ import java.io.Serializable;
 @NoArgsConstructor
 public class Rol implements Serializable {
 
+    @JsonIgnore
     @Id
     @Column(name="id")
     private Long id;
 
+    @JsonIgnore
     @Column(name="description")
     private String description;
 

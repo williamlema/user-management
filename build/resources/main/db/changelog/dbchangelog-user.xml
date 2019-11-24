@@ -40,7 +40,7 @@
 	<changeSet author="williamlema" id="insert_user_admin">
 		<insert tableName="user">
 			<column name="name">William Leon</column>
-			<column name="password">123456</column>
+			<column name="password">$2a$10$VwGtw7vpNfAb57OmDiUAjuV1QPNCr3e6Jyn1SllUchfVID.eHKWBq</column>
 			<column name="user_name">williamlema</column>
 			<column name="email">weleonm@gmail.com</column>
 			<column name="phone_number">3107760309</column>
