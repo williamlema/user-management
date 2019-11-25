@@ -10,20 +10,14 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 
 @Configuration
-public class AuthenticationConfig {
-
-    @Autowired
-    private AuthenticationFilter filter;
+public class JacksonConfig {
 
     @Bean
-    public FilterRegistrationBean<AuthenticationFilter> loggingFilter(){
-        FilterRegistrationBean<AuthenticationFilter> registrationBean
-                = new FilterRegistrationBean<>();
-
-        registrationBean.setFilter(filter);
-        registrationBean.addUrlPatterns("/user/*","/rol/*");
-
-        return registrationBean;
+    public MappingJackson2HttpMessageConverter mappingJackson2HttpMessageConverter() {
+        ObjectMapper mapper = new ObjectMapper();
+        mapper.configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false);
+        MappingJackson2HttpMessageConverter converter =
+                new MappingJackson2HttpMessageConverter(mapper);
+        return converter;
     }
-
 }

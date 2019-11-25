@@ -16,6 +16,7 @@ import java.io.Serializable;
  * @version 1.0
  * @since 1.0
  */
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @Entity
 @Table(name = "user")
 @Data
