@@ -48,4 +48,24 @@ public interface IUserService {
      * @return
      */
     User active(User userToActive);
+
+    /**
+     * Seve the given list of users
+     * @param users
+     */
+    void saveAll(List<User> users);
+
+    /**
+     * Retrieve user information by username
+     *
+     * @return
+     */
+    User getByUsername(String username);
+
+    /**
+     * Update password for given username
+     *
+     * @return
+     */
+    User updatePassword(String username, String passwod);
 }
