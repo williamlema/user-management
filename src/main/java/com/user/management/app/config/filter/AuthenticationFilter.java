@@ -25,8 +25,10 @@ public class AuthenticationFilter implements Filter {
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
         HttpServletRequest httpRequest = (HttpServletRequest) request;
         String authorization =  httpRequest.getHeader("Authorization");
-        if(ObjectUtils.isEmpty(authorization)
-                || ObjectUtils.isEmpty(tokenRepository.findFirstByTokenAndActive(authorization, Boolean.TRUE))){
+        if(!httpRequest.getMethod().equals("OPTIONS")
+                && (ObjectUtils.isEmpty(authorization)
+                || ObjectUtils.isEmpty(tokenRepository.findFirstByTokenAndActive(authorization, Boolean.TRUE)))){
+            System.out.println(httpRequest.getMethod());
             throw new NoAuthenticatedException("Usuario no autenticado");
         }
         chain.doFilter(request,response);

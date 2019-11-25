@@ -46,6 +46,7 @@ public class UserController {
         return ResponseEntity.ok(userService.get(authorization));
     }
 
+    @CrossOrigin
     @PatchMapping
     public ResponseEntity<User> update(
             @Valid
