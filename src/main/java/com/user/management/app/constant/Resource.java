@@ -12,6 +12,9 @@ public class Resource {
     public static final String ROL = "rol";
 
     public static final String REGISTER = "register";
+    public static final String COMPLETE_REGISTER = "/complete";
     public static final String VALIDATE = "/validate/{token}";
+    public static final String VALIDATE_USER = "/validate/user/{username}";
+    public static final String BULK_REGISTER = "/bulk";
 
 }

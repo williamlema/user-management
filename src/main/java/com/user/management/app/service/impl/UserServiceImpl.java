@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static com.user.management.app.constant.RolType.isAdmin;
 import static com.user.management.app.constant.RolType.isAgent;
@@ -106,4 +107,46 @@ public class UserServiceImpl implements IUserService {
         userToActive.setActivated(Boolean.TRUE);
         return userRepository.save(userToActive);
     }
+
+    /**
+     * Seve the given list of users
+     *
+     * @param users
+     */
+    @Override
+    public void saveAll(List<User> users) {
+        List<User> usersInSystem = userRepository.findAll();
+        users = users.stream()
+                .filter(user -> !usersInSystem.stream()
+                        .anyMatch(user1 -> user1.getUserName().equals(user.getUserName())))
+                .collect(Collectors.toList());
+
+        userRepository.saveAll(users);
+    }
+
+    /**
+     * Retrieve user information by username
+     *
+     * @param username
+     * @return
+     */
+    @Override
+    public User getByUsername(String username) {
+        return userRepository.findFirstByUserName(username);
+    }
+
+    /**
+     * Update password for given username
+     *
+     * @param username
+     * @param passwod
+     * @return
+     */
+    @Override
+    public User updatePassword(String username, String passwod) {
+        User user = this.getByUsername(username);
+        user.setPassword(passwod);
+        return this.userRepository.save(user);
+    }
+
 }
