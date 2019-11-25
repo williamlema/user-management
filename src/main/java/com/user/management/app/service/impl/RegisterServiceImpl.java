@@ -4,6 +4,7 @@ import com.user.management.app.constant.SupportedFiles;
 import com.user.management.app.constant.TokenType;
 import com.user.management.app.exception.InActiveTokenException;
 import com.user.management.app.exception.NoPermissionsException;
+import com.user.management.app.exception.NoSupportedFileException;
 import com.user.management.app.model.dto.CredentialDto;
 import com.user.management.app.model.dto.RegisterUserDto;
 import com.user.management.app.model.entity.Rol;
@@ -23,7 +24,10 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.TreeSet;
@@ -131,9 +135,10 @@ public class RegisterServiceImpl implements IRegisterService {
             List<User> userList = new ArrayList<>();
             switch (fileType){
                 case CSV:
+                    userList = getUserFromCSVFile(userFile);
                     break;
                 case TVS:
-
+                    new NoSupportedFileException("Archivo no soportado");
                     break;
                 case XLSX:
                     userList = getUserFromExcelFile(userFile);
@@ -188,6 +193,27 @@ public class RegisterServiceImpl implements IRegisterService {
         String message ="Abrir el siguiente link en el nevagador \n "
                 .concat(VALIDATE_URL).concat(generatedToken.getToken());
         emailService.sendMail(savedUser.getEmail(), SUBJECT, message);
+    }
+
+    private List<User> getUserFromCSVFile(MultipartFile userFile) throws IOException  {
+        String line;
+        InputStream is = userFile.getInputStream();
+        BufferedReader br = new BufferedReader(new InputStreamReader(is));
+        List<User> userList = new ArrayList<>();
+        Rol defaultRol = rolService.get(DEFAULT_USER_ROL_ID);
+        br.readLine();//Cabeceras
+        while ((line = br.readLine()) != null) {
+            String data[] = line.split(",");
+            userList.add(User.builder()
+                    .name(data[0])
+                    .userName(data[1])
+                    .email(data[2])
+                    .phoneNumber(data[3])
+                    .activated(Boolean.FALSE)
+                    .rol(defaultRol)
+                    .build());
+        }
+        return userList.stream().distinct().collect(collectingAndThen(toCollection(() -> new TreeSet<>(comparing((c1)->c1.getUserName()))), ArrayList::new));
     }
 
     private List<User> getUserFromExcelFile(MultipartFile userFile) throws IOException {

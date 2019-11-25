@@ -17,4 +17,9 @@ public class Resource {
     public static final String VALIDATE_USER = "/validate/user/{username}";
     public static final String BULK_REGISTER = "/bulk";
 
+    public static final String EXPORT = "export";
+    public static final String EXPORT_USER_XSLX = "/users.xlsx";
+    public static final String EXPORT_USER_XSL = "/users.xls";
+    public static final String EXPORT_USER_CSV = "/users.csv";
+
 }
