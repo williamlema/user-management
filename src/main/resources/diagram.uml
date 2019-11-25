@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement />
+  <nodes>
+    <node x="1192.8688541666666" y="0.0">com.user.management.app.service.api.IUserService</node>
+    <node x="991.5734375" y="176.0">com.user.management.app.service.impl.RolServiceImpl</node>
+    <node x="0.0" y="176.0">com.user.management.app.controller.ExportController</node>
+    <node x="176.0" y="176.0">com.user.management.app.controller.AuthenticationController</node>
+    <node x="35.887604166666506" y="0.0">com.user.management.app.service.api.IFileService</node>
+    <node x="584.3122916666666" y="0.0">com.user.management.app.repository.UserRepository</node>
+    <node x="1334.3309375" y="176.0">com.user.management.app.service.impl.RegisterServiceImpl</node>
+    <node x="843.9375" y="0.0">com.user.management.app.repository.TokenRepository</node>
+    <node x="1862.3309375" y="176.0">com.user.management.app.controller.RegisterController</node>
+    <node x="1707.3309375" y="176.0">com.user.management.app.controller.RolController</node>
+    <node x="1387.6642708333334" y="0.0">com.user.management.app.service.api.IEmailService</node>
+    <node x="1593.1892708333335" y="0.0">com.user.management.app.service.api.IRolService</node>
+    <node x="1531.3309375" y="176.0">com.user.management.app.service.impl.EmailServiceImpl</node>
+    <node x="577.0" y="176.0">com.user.management.app.service.impl.AuthenticationServiceImpl</node>
+    <node x="218.8876041666665" y="0.0">com.user.management.app.service.api.IAuthenticationService</node>
+    <node x="816.0" y="176.0">com.user.management.app.service.impl.UserServiceImpl</node>
+    <node x="1022.25" y="0.0">com.user.management.app.repository.RolRepository</node>
+    <node x="1834.5749999999998" y="0.0">com.user.management.app.service.api.IRegisterService</node>
+    <node x="1159.1247916666666" y="176.0">com.user.management.app.controller.UserController</node>
+    <node x="408.0" y="176.0">com.user.management.app.service.impl.FileServiceImpl</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="com.user.management.app.service.impl.RolServiceImpl" target="com.user.management.app.repository.RolRepository">
+      <point x="28.399999999999977" y="-13.0" />
+      <point x="1090.9734374999998" y="96.0" />
+      <point x="1123.5" y="96.0" />
+      <point x="33.75" y="13.0" />
+    </edge>
+    <edge source="com.user.management.app.controller.RegisterController" target="com.user.management.app.service.api.IRegisterService">
+      <point x="-42.5" y="-13.0" />
+      <point x="1904.8309375" y="156.0" />
+      <point x="1912.5749999999998" y="156.0" />
+      <point x="0.0" y="13.0" />
+    </edge>
+    <edge source="com.user.management.app.service.impl.FileServiceImpl" target="com.user.management.app.repository.UserRepository">
+      <point x="49.66666666666674" y="-13.0" />
+      <point x="532.1666666666667" y="156.0" />
+      <point x="619.8122916666666" y="156.0" />
+      <point x="-35.5" y="13.0" />
+    </edge>
+    <edge source="com.user.management.app.service.impl.RegisterServiceImpl" target="com.user.management.app.service.api.IEmailService">
+      <point x="19.66666666666663" y="-13.0" />
+      <point x="1442.4976041666666" y="116.0" />
+      <point x="1455.1642708333334" y="116.0" />
+      <point x="0.0" y="13.0" />
+    </edge>
+    <edge source="com.user.management.app.service.impl.RolServiceImpl" target="com.user.management.app.service.api.IRolService">
+      <point x="56.799999999999955" y="-13.0" />
+      <point x="1119.3734375" y="126.0" />
+      <point x="1605.2892708333334" y="126.0" />
+      <point x="-48.39999999999998" y="13.0" />
+    </edge>
+    <edge source="com.user.management.app.service.impl.RegisterServiceImpl" target="com.user.management.app.repository.TokenRepository">
+      <point x="-59.0" y="-13.0" />
+      <point x="1363.8309375" y="66.0" />
+      <point x="983.625" y="66.0" />
+      <point x="65.1875" y="13.0" />
+    </edge>
+    <edge source="com.user.management.app.controller.RolController" target="com.user.management.app.service.api.IRolService">
+      <point x="-33.75" y="-13.0" />
+      <point x="1741.0809375" y="146.0" />
+      <point x="1677.8892708333333" y="146.0" />
+      <point x="24.200000000000045" y="13.0" />
+    </edge>
+    <edge source="com.user.management.app.service.impl.FileServiceImpl" target="com.user.management.app.service.api.IFileService">
+      <point x="-49.66666666666674" y="-13.0" />
+      <point x="432.83333333333326" y="146.0" />
+      <point x="142.55427083333325" y="146.0" />
+      <point x="42.66666666666674" y="13.0" />
+    </edge>
+    <edge source="com.user.management.app.service.impl.RegisterServiceImpl" target="com.user.management.app.service.api.IRegisterService">
+      <point x="78.66666666666663" y="-13.0" />
+      <point x="1501.4976041666666" y="156.0" />
+      <point x="1860.5749999999998" y="156.0" />
+      <point x="-52.0" y="13.0" />
+    </edge>
+    <edge source="com.user.management.app.service.impl.UserServiceImpl" target="com.user.management.app.repository.UserRepository">
+      <point x="-29.799999999999955" y="-13.0" />
+      <point x="860.7" y="126.0" />
+      <point x="714.4789583333334" y="126.0" />
+      <point x="59.16666666666674" y="13.0" />
+    </edge>
+    <edge source="com.user.management.app.service.impl.RegisterServiceImpl" target="com.user.management.app.service.api.IRolService">
+      <point x="59.0" y="-13.0" />
+      <point x="1481.8309375" y="146.0" />
+      <point x="1653.6892708333335" y="146.0" />
+      <point x="0.0" y="13.0" />
+    </edge>
+    <edge source="com.user.management.app.controller.UserController" target="com.user.management.app.service.api.IUserService">
+      <point x="-35.5" y="-13.0" />
+      <point x="1194.6247916666666" y="116.0" />
+      <point x="1231.2688541666664" y="116.0" />
+      <point x="-25.600000000000023" y="13.0" />
+    </edge>
+    <edge source="com.user.management.app.service.impl.EmailServiceImpl" target="com.user.management.app.service.api.IEmailService">
+      <point x="0.0" y="-13.0" />
+      <point x="1609.3309375" y="116.0" />
+      <point x="1500.1642708333334" y="116.0" />
+      <point x="45.0" y="13.0" />
+    </edge>
+    <edge source="com.user.management.app.controller.AuthenticationController" target="com.user.management.app.service.api.IAuthenticationService">
+      <point x="53.0" y="-13.0" />
+      <point x="335.0" y="156.0" />
+      <point x="317.8876041666665" y="156.0" />
+      <point x="0.0" y="13.0" />
+    </edge>
+    <edge source="com.user.management.app.service.impl.RolServiceImpl" target="com.user.management.app.repository.TokenRepository">
+      <point x="-56.799999999999955" y="-13.0" />
+      <point x="1005.7734375" y="96.0" />
+      <point x="927.75" y="96.0" />
+      <point x="9.3125" y="13.0" />
+    </edge>
+    <edge source="com.user.management.app.service.impl.UserServiceImpl" target="com.user.management.app.repository.TokenRepository">
+      <point x="0.0" y="-13.0" />
+      <point x="-27.9375" y="13.0" />
+    </edge>
+    <edge source="com.user.management.app.service.impl.RegisterServiceImpl" target="com.user.management.app.service.api.IUserService">
+      <point x="-19.666666666666742" y="-13.0" />
+      <point x="1403.1642708333334" y="46.0" />
+      <point x="1308.0688541666664" y="46.0" />
+      <point x="51.19999999999999" y="13.0" />
+    </edge>
+    <edge source="com.user.management.app.controller.ExportController" target="com.user.management.app.service.api.IFileService">
+      <point x="39.0" y="-13.0" />
+      <point x="117.0" y="156.0" />
+      <point x="99.8876041666665" y="156.0" />
+      <point x="0.0" y="13.0" />
+    </edge>
+    <edge source="com.user.management.app.service.impl.AuthenticationServiceImpl" target="com.user.management.app.service.api.IAuthenticationService">
+      <point x="-87.60000000000014" y="-13.0" />
+      <point x="598.8999999999999" y="136.0" />
+      <point x="383.8876041666665" y="136.0" />
+      <point x="66.0" y="13.0" />
+    </edge>
+    <edge source="com.user.management.app.service.impl.AuthenticationServiceImpl" target="com.user.management.app.repository.TokenRepository">
+      <point x="87.59999999999991" y="-13.0" />
+      <point x="774.0999999999999" y="156.0" />
+      <point x="871.875" y="156.0" />
+      <point x="-46.5625" y="13.0" />
+    </edge>
+    <edge source="com.user.management.app.service.impl.AuthenticationServiceImpl" target="com.user.management.app.repository.UserRepository">
+      <point x="-43.799999999999955" y="-13.0" />
+      <point x="-11.833333333333258" y="13.0" />
+    </edge>
+    <edge source="com.user.management.app.service.impl.UserServiceImpl" target="com.user.management.app.service.api.IUserService">
+      <point x="59.59999999999991" y="-13.0" />
+      <point x="950.0999999999999" y="106.0" />
+      <point x="1205.6688541666665" y="106.0" />
+      <point x="-51.19999999999999" y="13.0" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="0.9" x="938.5" y="294.5" />
+  <SelectedNodes />
+  <Categories />
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+
